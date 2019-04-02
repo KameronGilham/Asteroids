@@ -8,8 +8,8 @@ public class KeyboardInputs {
 	
 	boolean shipFWD = false;
 	boolean shipBACK = false;
-	boolean shipSpinL = false;
-	boolean shipSpinR = false;
+	static boolean shipSpinL = false;
+	static boolean shipSpinR = false;
 	
 
 	public void keyboardInput(KeyEvent key, GraphicsContext gc) {

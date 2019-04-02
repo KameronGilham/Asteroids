@@ -12,8 +12,9 @@ import javafx.stage.Stage;
 
 public class AsteroidsGame extends Application {
 
-	int canvasW = 1000;
-	int canvasH = 1000;
+	static int canvasW = 1000;
+	static int canvasH = 1000;
+	Ship ship;
 	
 
 	@Override
@@ -39,10 +40,16 @@ public class AsteroidsGame extends Application {
 			public void handle(long now) {
 
 				gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+				ship.update(keyboarding, gc);
+				ship.draw(gc);
 
 
 			}
 
 		}.start();
+	}
+	
+	public void init() {
+		ship = new Ship();
 	}
 }
