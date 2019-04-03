@@ -2,6 +2,8 @@ package org;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Affine;
+import javafx.scene.transform.Rotate;
 
 public class Ship {
 	
@@ -15,7 +17,7 @@ public Ship() {
 	color = Color.WHITE;
 	shipX = AsteroidsGame.canvasW/2;
 	shipY = AsteroidsGame.canvasH/2;
-	
+	degrees = 0;
 	
 }
 	
@@ -47,16 +49,14 @@ public void setShipY(int shipY) {
 
 public void draw(GraphicsContext gc) {
 	
-	double[] xPoints = new double[]{shipX , shipX - 50, shipX + 50};
-	double[] yPoints = new double[]{shipY, shipY + 50, shipY + 50};
+	double[] xPoints = new double[]{shipX, shipX, shipX - 25, shipX + 25, shipX};
+	double[] yPoints = new double[]{shipY, shipY - 33.33, shipY + 16.66, shipY + 16.66, shipY - 33.33};
 	
 		gc.setFill(color);
 		
 		gc.save();
-		gc.translate(getShipX(), getShipY());
-		gc.rotate(degrees);
-		gc.fillPolygon(xPoints, yPoints, 3);
-		gc.translate(-getShipX(), -getShipY());
+		gc.transform(new Affine(new Rotate(degrees,shipX,shipY)));
+		gc.fillPolygon(xPoints, yPoints, 5);
 		gc.restore();
 	}
 
