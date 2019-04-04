@@ -6,8 +6,8 @@ import javafx.scene.input.KeyEvent;
 
 public class KeyboardInputs {
 	
-	boolean shipFWD = false;
-	boolean shipBACK = false;
+	static boolean shipFWD = false;
+	static boolean shipBACK = false;
 	static boolean shipSpinL = false;
 	static boolean shipSpinR = false;
 	
