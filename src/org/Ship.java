@@ -9,12 +9,12 @@ public class Ship {
 	
 	Color color;
 	int degrees;
-	int shipX;
-	int shipY;
+	double shipX;
+	double shipY;
 	int xVelocity;
 	int yVelocity;
-	int acceleration;
-	int angle = (int) (degrees * (Math.PI/180));
+	double acceleration;
+	double angle = (degrees * (Math.PI/180));
 	
 public Ship() {
 	
@@ -22,7 +22,7 @@ public Ship() {
 	shipX = AsteroidsGame.canvasW/2;
 	shipY = AsteroidsGame.canvasH/2;
 	degrees = 0;
-	acceleration = 1;
+	acceleration = 1; 
 	xVelocity = 0;
 	yVelocity = 0;
 	
@@ -30,7 +30,7 @@ public Ship() {
 	
 	
 	
-public int getShipX() {
+public double getShipX() {
 	return shipX;
 }
 
@@ -42,7 +42,7 @@ public void setShipX(int shipX) {
 
 
 
-public int getShipY() {
+public double getShipY() {
 	return shipY;
 }
 
@@ -78,23 +78,22 @@ public void draw(GraphicsContext gc) {
 		
 			
 			
-		if (angle > Math.PI * 2) {
-			angle -= Math.PI * 2;
-		}else if (angle < 0) {
-			angle += Math.PI * 2;
+		if (degrees > 360) {
+			degrees -= 360;
+		}else if (degrees < 0) {
+			degrees += 360;
 		}
 		
 		
 		}
 		if(KeyboardInputs.shipFWD) {
 			
-		  xVelocity += Math.sin(angle) * acceleration;
-		  yVelocity -= Math.cos(angle) * acceleration;
+		  xVelocity += Math.cos(angle) * acceleration;
+		  yVelocity += Math.sin(angle) * acceleration;
 		  
 		  shipX += xVelocity;
 		  
-		  shipY =+ yVelocity;
-		  
+		  shipY += yVelocity;
 		  
 		  
 		}
