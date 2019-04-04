@@ -12,8 +12,8 @@ import javafx.stage.Stage;
 
 public class AsteroidsGame extends Application {
 
-	static int canvasW = 800;
-	static int canvasH = 800;
+	static double canvasW = 800;
+	static double canvasH = 800;
 	Ship ship;
 	
 

@@ -8,11 +8,11 @@ import javafx.scene.transform.Rotate;
 public class Ship {
 	
 	Color color;
-	int degrees;
+	double degrees;
 	double shipX;
 	double shipY;
-	int xVelocity;
-	int yVelocity;
+	double xVelocity;
+	double yVelocity;
 	double acceleration;
 	double angle = (degrees * (Math.PI/180));
 	
@@ -22,37 +22,11 @@ public Ship() {
 	shipX = AsteroidsGame.canvasW/2;
 	shipY = AsteroidsGame.canvasH/2;
 	degrees = 0;
-	acceleration = 1; 
+	acceleration = .1; 
 	xVelocity = 0;
 	yVelocity = 0;
 	
 }
-	
-	
-	
-public double getShipX() {
-	return shipX;
-}
-
-
-
-public void setShipX(int shipX) {
-	this.shipX = shipX;
-}
-
-
-
-public double getShipY() {
-	return shipY;
-}
-
-
-
-public void setShipY(int shipY) {
-	this.shipY = shipY;
-}
-
-
 
 public void draw(GraphicsContext gc) {
 	
@@ -73,27 +47,34 @@ public void draw(GraphicsContext gc) {
 		if(KeyboardInputs.shipSpinR) {
 			degrees++;
 		}
+		
 		if(KeyboardInputs.shipSpinL) {
 			degrees--;
+		}
 		
-			
-			
 		if (degrees > 360) {
 			degrees -= 360;
+			
 		}else if (degrees < 0) {
 			degrees += 360;
 		}
 		
-		
-		}
 		if(KeyboardInputs.shipFWD) {
 			
-		  xVelocity += Math.cos(angle) * acceleration;
-		  yVelocity += Math.sin(angle) * acceleration;
+		  xVelocity += Math.sin(angle) * acceleration;
+		  yVelocity += Math.cos(angle) * acceleration;
+		  
+		  if(angle > Math.PI/2 && angle < 3 * Math.PI/2) {
+			  yVelocity *= (-1);
+		  }
+		  if(angle > Math.PI && angle < 2 * Math.PI) {
+			  xVelocity *= (-1);
+		  }
+			  
 		  
 		  shipX += xVelocity;
 		  
-		  shipY += yVelocity;
+		  shipY -= yVelocity;
 		  
 		  
 		}
