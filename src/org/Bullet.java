@@ -1,6 +1,7 @@
 package org;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
 public class Bullet {
@@ -20,10 +21,10 @@ public class Bullet {
 	
 	public Bullet() {
 		color = Color.WHITE;
-		bulletX = Ship.shipX;
-		bulletY = Ship.shipY;
 		bulletW = 10;
 		bulletH = 10;
+		bulletX = Ship.shipX - bulletW/2;
+		bulletY = Ship.shipY - bulletH/2;
 		bulletFrames = 0;
 		acceleration = 20;
 		angle = Ship.angle;
@@ -41,11 +42,18 @@ public class Bullet {
 
 	public void update(KeyboardInputs keyboarding, GraphicsContext gc) {
 		
+		
+		
 		if (KeyboardInputs.shoot) {
 			enroute = true;
 			}
 	
 		if (enroute) {
+			if (bulletFrames == 0) {
+				bulletX = Ship.shipX - bulletW/2;
+				bulletY = Ship.shipY - bulletH/2;
+				Bullet.angle = Ship.angle;
+			}
 			draw(gc);
 			bulletFrames++;
 		}
@@ -60,8 +68,8 @@ public class Bullet {
 		
 		if (bulletFrames > 45){
 			enroute = false;
-			bulletX = Ship.shipX;
-			bulletY = Ship.shipY;
+			bulletX = Ship.shipX - bulletW/2;
+			bulletY = Ship.shipY - bulletH/2;
 			bulletFrames= 0;
 			
 		}
@@ -78,7 +86,5 @@ public class Bullet {
 			bulletY -= AsteroidsGame.canvasH;
 			
 		}
-		
-		
 	}
 }

@@ -28,7 +28,6 @@ public class KeyboardInputs {
 				shipSpinR = true;
 			}
 			if (key.getCode() == KeyCode.SPACE) {
-				Bullet.angle = Ship.angle;
 				shoot = true;
 				
 			}
