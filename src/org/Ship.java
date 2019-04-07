@@ -22,7 +22,7 @@ public class Ship {
 		shipX = AsteroidsGame.canvasW / 2;
 		shipY = AsteroidsGame.canvasH / 2;
 		degrees = 0;
-		acceleration = 1;
+		acceleration = 0;
 		xVelocity = 0;
 		yVelocity = 0;
 
@@ -44,11 +44,11 @@ public class Ship {
 	public void update(KeyboardInputs keyboarding, GraphicsContext gc) {
 
 		if (KeyboardInputs.shipSpinR) {
-			degrees++;
+			degrees += 5;
 		}
 
 		if (KeyboardInputs.shipSpinL) {
-			degrees--;
+			degrees -= 5;
 		}
 
 		if (degrees > 360) {
@@ -61,17 +61,24 @@ public class Ship {
 		angle = (degrees * (Math.PI / 180));
 
 		if (KeyboardInputs.shipFWD) {
-
-			xVelocity = Math.sin(angle) * acceleration;
-			yVelocity = Math.cos(angle) * acceleration;
-
-			shipX += xVelocity;
-
-			shipY -= yVelocity;
 			
-			acceleration += .05;
+			if (acceleration < 15) {
+				acceleration += .25;
+			}
 
 		}
+		if (KeyboardInputs.shipBACK) {
+			if (acceleration > -10)
+			acceleration -= .25;
+		}
+		
+		xVelocity = Math.sin(angle) * acceleration;
+		yVelocity = Math.cos(angle) * acceleration;
+		
+		shipX += xVelocity;
+
+		shipY -= yVelocity;
+		
 		if (shipX < 0) {
 			shipX += AsteroidsGame.canvasW;
 		}else if (shipX > AsteroidsGame.canvasW) {
