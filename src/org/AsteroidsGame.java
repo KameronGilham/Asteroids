@@ -15,6 +15,7 @@ public class AsteroidsGame extends Application {
 	static double canvasW = 800;
 	static double canvasH = 800;
 	Ship ship;
+	Bullet bullet;
 	
 
 	@Override
@@ -42,6 +43,7 @@ public class AsteroidsGame extends Application {
 				gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 				ship.update(keyboarding, gc);
 				ship.draw(gc);
+				bullet.update(keyboarding, gc);
 
 
 			}
@@ -51,5 +53,6 @@ public class AsteroidsGame extends Application {
 	
 	public void init() {
 		ship = new Ship();
+		bullet = new Bullet();
 	}
 }

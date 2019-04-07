@@ -10,6 +10,7 @@ public class KeyboardInputs {
 	static boolean shipBACK = false;
 	static boolean shipSpinL = false;
 	static boolean shipSpinR = false;
+	static boolean shoot = false;
 	
 
 	public void keyboardInput(KeyEvent key, GraphicsContext gc) {
@@ -26,6 +27,11 @@ public class KeyboardInputs {
 			if (key.getCode() == KeyCode.RIGHT) {
 				shipSpinR = true;
 			}
+			if (key.getCode() == KeyCode.SPACE) {
+				Bullet.angle = Ship.angle;
+				shoot = true;
+				
+			}
 			
 		}
 		if (key.getEventType() == KeyEvent.KEY_RELEASED) {
@@ -40,6 +46,8 @@ public class KeyboardInputs {
 			}
 			if (key.getCode() == KeyCode.RIGHT) {
 				shipSpinR = false;
+			}if (key.getCode() == KeyCode.SPACE) {
+				shoot = false;
 			}
 		}
 		

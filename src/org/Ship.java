@@ -9,12 +9,12 @@ public class Ship {
 
 	Color color;
 	double degrees;
-	double shipX;
-	double shipY;
+	static double shipX;
+	static double shipY;
 	double xVelocity;
 	double yVelocity;
 	double acceleration;
-	double angle;
+	static double angle;
 
 	public Ship() {
 
