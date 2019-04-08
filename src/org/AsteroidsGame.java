@@ -3,6 +3,7 @@ package org;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -18,11 +19,14 @@ public class AsteroidsGame extends Application {
 
 	static double canvasW = 800;
 	static double canvasH = 800;
+	Random randomGen = new Random();
 	Ship ship;
+	Asteroid asteroid;
 	Bullet bullet;
 	Bullet bullet2;
 	Bullet bullet3;
 	List<Bullet> bullets = new ArrayList<Bullet>();
+	List<Asteroid> asteroids = new ArrayList<Asteroid>();
 	
 
 	@Override
@@ -58,6 +62,13 @@ public class AsteroidsGame extends Application {
 					queue.update(keyboarding, gc);
 				}
 				
+				Iterator<Asteroid> iter2 = asteroids.iterator();
+				while(iter2.hasNext()) {
+					Asteroid queue2 = iter2.next();
+					queue2.draw(gc);
+					queue2.update(gc);
+				}
+				
 
 
 			}
@@ -67,6 +78,12 @@ public class AsteroidsGame extends Application {
 	
 	public void init() {
 		ship = new Ship(Color.BLUE);
+		
+		for(int i = 0 ; i < randomGen.nextInt(5)+1; i++) {
+			int astDegrees = randomGen.nextInt(360)+1;
+			asteroid = new Asteroid(astDegrees);
+			asteroids.add(asteroid);
+		}
 		
 	    bullet = new Bullet(Color.RED);
 		bullet2 = new Bullet(Color.ORANGE);

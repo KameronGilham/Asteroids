@@ -47,7 +47,7 @@ public class Bullet {
 		
 		if (KeyboardInputs.shoot) {
 			enroute = true;
-			}
+		}
 	
 		if (enroute) {
 			if (bulletFrames == 0) {
