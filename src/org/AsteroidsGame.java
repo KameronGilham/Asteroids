@@ -1,5 +1,9 @@
 package org;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -16,6 +20,9 @@ public class AsteroidsGame extends Application {
 	static double canvasH = 800;
 	Ship ship;
 	Bullet bullet;
+	Bullet bullet2;
+	Bullet bullet3;
+	List<Bullet> bullets = new ArrayList<Bullet>();
 	
 
 	@Override
@@ -43,7 +50,14 @@ public class AsteroidsGame extends Application {
 				gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 				ship.update(keyboarding, gc);
 				ship.draw(gc);
-				bullet.update(keyboarding, gc);
+				//bullet.update(keyboarding, gc);
+				
+				Iterator<Bullet> iter = bullets.iterator();
+				while(iter.hasNext()) {
+					Bullet queue = iter.next();
+					queue.update(keyboarding, gc);
+				}
+				
 
 
 			}
@@ -52,7 +66,14 @@ public class AsteroidsGame extends Application {
 	}
 	
 	public void init() {
-		ship = new Ship();
-		bullet = new Bullet();
+		ship = new Ship(Color.BLUE);
+		
+	    bullet = new Bullet(Color.RED);
+		bullet2 = new Bullet(Color.ORANGE);
+		bullet3 = new Bullet(Color.WHITE);
+		
+		bullets.add(bullet);
+		bullets.add(bullet2);
+		bullets.add(bullet3);
 	}
 }

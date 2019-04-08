@@ -16,9 +16,9 @@ public class Ship {
 	double acceleration;
 	static double angle;
 
-	public Ship() {
+	public Ship(Color c) {
 
-		color = Color.WHITE;
+		color = c;
 		shipX = AsteroidsGame.canvasW / 2;
 		shipY = AsteroidsGame.canvasH / 2;
 		degrees = 0;

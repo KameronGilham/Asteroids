@@ -1,26 +1,25 @@
 package org;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
 public class Bullet {
 	
+	Color color;
+	boolean enroute = false;
 	double bulletX;
 	double bulletY;
 	double bulletW;
 	double bulletH;
-	boolean enroute = false;
 	double xVelocity;
 	double yVelocity;
 	double acceleration;
-	static double angle;
-	Color color;
+	double angle;
 	double bulletFrames;
 	
 	
-	public Bullet() {
-		color = Color.WHITE;
+	public Bullet(Color c) {
+		color = c;
 		bulletW = 10;
 		bulletH = 10;
 		bulletX = Ship.shipX - bulletW/2;
@@ -36,7 +35,9 @@ public class Bullet {
 	public void draw(GraphicsContext gc) {
 		
 		gc.setFill(color);
+		gc.save();
 		gc.fillRect(bulletX, bulletY, bulletW, bulletH);
+		gc.restore(); 
 		
 	}
 
@@ -52,7 +53,7 @@ public class Bullet {
 			if (bulletFrames == 0) {
 				bulletX = Ship.shipX - bulletW/2;
 				bulletY = Ship.shipY - bulletH/2;
-				Bullet.angle = Ship.angle;
+				angle = Ship.angle;
 			}
 			draw(gc);
 			bulletFrames++;
