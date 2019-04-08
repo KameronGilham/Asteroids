@@ -29,7 +29,7 @@ public class Asteroid {
 		astFrames = 0;
 		xVelocity = 0;
 		yVelocity = 0;
-		acceleration = randomGen.nextInt(5) + 1;
+		acceleration = randomGen.nextInt(2) + 1;
 		degrees = d;
 		angle = (degrees * (Math.PI / 180));
 		

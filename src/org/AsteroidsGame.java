@@ -44,7 +44,7 @@ public class AsteroidsGame extends Application {
 		stage.setTitle("Asteroids");
 		stage.show();
 
-		init();
+		//init();
 
 		new AnimationTimer() {
 
@@ -76,10 +76,13 @@ public class AsteroidsGame extends Application {
 		}.start();
 	}
 	
+	@Override
 	public void init() {
+		
 		ship = new Ship(Color.BLUE);
 		
-		for(int i = 0 ; i < randomGen.nextInt(5)+1; i++) {
+		for(int i = 0; i < randomGen.nextInt(5)+1; i++) {
+
 			int astDegrees = randomGen.nextInt(360)+1;
 			asteroid = new Asteroid(astDegrees);
 			asteroids.add(asteroid);
