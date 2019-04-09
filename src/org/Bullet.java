@@ -6,14 +6,14 @@ import javafx.scene.paint.Color;
 public class Bullet {
 	
 	Color color;
-	boolean enroute = false;
+	static boolean enroute = false;
 	double bulletX;
 	double bulletY;
 	double bulletW;
 	double bulletH;
 	double xVelocity;
 	double yVelocity;
-	double acceleration;
+	double speed;
 	double angle;
 	double bulletFrames;
 	
@@ -25,7 +25,7 @@ public class Bullet {
 		bulletX = Ship.shipX - bulletW/2;
 		bulletY = Ship.shipY - bulletH/2;
 		bulletFrames = 0;
-		acceleration = 20;
+		speed = 20;
 		angle = Ship.angle;
 		xVelocity = 0;
 		yVelocity = 0;
@@ -43,37 +43,21 @@ public class Bullet {
 
 	public void update(KeyboardInputs keyboarding, GraphicsContext gc) {
 		
-		
-		
-		if (KeyboardInputs.shoot) {
-			enroute = true;
-		}
-	
-		if (enroute) {
-			if (bulletFrames == 0) {
-				bulletX = Ship.shipX - bulletW/2;
-				bulletY = Ship.shipY - bulletH/2;
-				angle = Ship.angle;
-			}
-			draw(gc);
-			bulletFrames++;
+		 
+		if (bulletFrames == 0) {
+			bulletX = Ship.shipX - bulletW/2;
+			bulletY = Ship.shipY - bulletH/2;
+			angle = Ship.angle;
 		}
 		
 		
-		xVelocity = Math.sin(angle) * acceleration;
-		yVelocity = Math.cos(angle) * acceleration;
+		xVelocity = Math.sin(angle) * speed;
+		yVelocity = Math.cos(angle) * speed;
 		
 		bulletX += xVelocity;
 
 		bulletY -= yVelocity;
 		
-		if (bulletFrames > 45){
-			enroute = false;
-			bulletX = Ship.shipX - bulletW/2;
-			bulletY = Ship.shipY - bulletH/2;
-			bulletFrames= 0;
-			
-		}
 		
 		if (bulletX < 0) {
 			bulletX += AsteroidsGame.canvasW;
@@ -87,5 +71,6 @@ public class Bullet {
 			bulletY -= AsteroidsGame.canvasH;
 			
 		}
+		bulletFrames++;
 	}
 }

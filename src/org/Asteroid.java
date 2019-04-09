@@ -14,7 +14,7 @@ public class Asteroid {
 	double astH;
 	double xVelocity;
 	double yVelocity;
-	double acceleration;
+	double speed;
 	double degrees;
 	double angle;
 	double astFrames;
@@ -29,7 +29,7 @@ public class Asteroid {
 		astFrames = 0;
 		xVelocity = 0;
 		yVelocity = 0;
-		acceleration = randomGen.nextInt(5) + 1;
+		speed = randomGen.nextInt(5) + 1;
 		degrees = d;
 		angle = (degrees * (Math.PI / 180));
 		
@@ -43,12 +43,8 @@ public class Asteroid {
 	
 	public void update(GraphicsContext gc) {
 		
-		//if(astFrames == 0) {
-		//	angle = ((randomGen.nextInt(360)+1) * (Math.PI / 180));
-		//}
-		
-		xVelocity = Math.sin(angle) * acceleration;
-		yVelocity = Math.cos(angle) * acceleration;
+		xVelocity = Math.sin(angle) * speed;
+		yVelocity = Math.cos(angle) * speed;
 		
 		astX += xVelocity;
 

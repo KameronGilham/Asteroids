@@ -27,7 +27,6 @@ public class AsteroidsGame extends Application {
 	Bullet bullet3;
 	List<Bullet> bullets = new ArrayList<Bullet>();
 	List<Asteroid> asteroids = new ArrayList<Asteroid>();
-	
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -44,8 +43,6 @@ public class AsteroidsGame extends Application {
 		stage.setTitle("Asteroids");
 		stage.show();
 
-		//init();
-
 		new AnimationTimer() {
 
 			@Override
@@ -54,46 +51,54 @@ public class AsteroidsGame extends Application {
 				gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 				ship.update(keyboarding, gc);
 				ship.draw(gc);
-				//bullet.update(keyboarding, gc);
-				
+				fire();
+
 				Iterator<Bullet> iter = bullets.iterator();
-				while(iter.hasNext()) {
+				while (iter.hasNext()) {
 					Bullet queue = iter.next();
 					queue.update(keyboarding, gc);
+					if (queue.bulletFrames > 30) {
+						iter.remove();
+					} else {
+						queue.draw(gc);
+					}
+
 				}
-				
+
 				Iterator<Asteroid> iter2 = asteroids.iterator();
-				while(iter2.hasNext()) {
+				while (iter2.hasNext()) {
 					Asteroid queue2 = iter2.next();
 					queue2.draw(gc);
 					queue2.update(gc);
 				}
-				
-
 
 			}
 
 		}.start();
 	}
-	
+
 	@Override
 	public void init() {
-		
-		ship = new Ship(Color.BLUE);
-		
-		for(int i = 0; i < randomGen.nextInt(5)+1; i++) {
 
-			int astDegrees = randomGen.nextInt(360)+1;
+		ship = new Ship(Color.BLUE);
+
+		for (int i = 0; i < randomGen.nextInt(5) + 1; i++) {
+
+			int astDegrees = randomGen.nextInt(360) + 1;
 			asteroid = new Asteroid(astDegrees);
 			asteroids.add(asteroid);
 		}
-		
-	    bullet = new Bullet(Color.RED);
-		bullet2 = new Bullet(Color.ORANGE);
-		bullet3 = new Bullet(Color.WHITE);
-		
-		bullets.add(bullet);
-		bullets.add(bullet2);
-		bullets.add(bullet3);
+
+	}
+
+	public void fire() {
+
+		if (KeyboardInputs.shoot) {
+			
+			bullet = new Bullet(Color.RED);
+			bullets.add(bullet);
+
+		}
+
 	}
 }

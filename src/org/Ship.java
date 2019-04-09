@@ -13,7 +13,7 @@ public class Ship {
 	static double shipY;
 	double xVelocity;
 	double yVelocity;
-	double acceleration;
+	double speed;
 	static double angle;
 
 	public Ship(Color c) {
@@ -22,7 +22,7 @@ public class Ship {
 		shipX = AsteroidsGame.canvasW / 2;
 		shipY = AsteroidsGame.canvasH / 2;
 		degrees = 0;
-		acceleration = 0;
+		speed = 0;
 		xVelocity = 0;
 		yVelocity = 0;
 
@@ -62,18 +62,18 @@ public class Ship {
 
 		if (KeyboardInputs.shipFWD) {
 			
-			if (acceleration < 15) {
-				acceleration += .25;
+			if (speed < 15) {
+				speed += .25;
 			}
 
 		}
 		if (KeyboardInputs.shipBACK) {
-			if (acceleration > -10)
-			acceleration -= .25;
+			if (speed > -10)
+			speed -= .25;
 		}
 		
-		xVelocity = Math.sin(angle) * acceleration;
-		yVelocity = Math.cos(angle) * acceleration;
+		xVelocity = Math.sin(angle) * speed;
+		yVelocity = Math.cos(angle) * speed;
 		
 		shipX += xVelocity;
 
