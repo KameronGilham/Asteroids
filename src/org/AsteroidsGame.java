@@ -55,21 +55,21 @@ public class AsteroidsGame extends Application {
 
 				Iterator<Bullet> iter = bullets.iterator();
 				while (iter.hasNext()) {
-					Bullet queue = iter.next();
-					queue.update(keyboarding, gc);
-					if (queue.bulletFrames > 30) {
+					Bullet bulletQ = iter.next();
+					bulletQ.update(keyboarding, gc);
+					if (bulletQ.bulletFrames > 30) {
 						iter.remove();
 					} else {
-						queue.draw(gc);
+						bulletQ.draw(gc);
 					}
 
 				}
 
 				Iterator<Asteroid> iter2 = asteroids.iterator();
 				while (iter2.hasNext()) {
-					Asteroid queue2 = iter2.next();
-					queue2.draw(gc);
-					queue2.update(gc);
+					Asteroid astQ = iter2.next();
+					astQ.draw(gc);
+					astQ.update(gc);
 				}
 
 			}
@@ -81,8 +81,9 @@ public class AsteroidsGame extends Application {
 	public void init() {
 
 		ship = new Ship(Color.BLUE);
+		int astNum = randomGen.nextInt(5) + 3;
 
-		for (int i = 0; i < randomGen.nextInt(5) + 1; i++) {
+		for (int i = 0; i < astNum; i++) {
 
 			int astDegrees = randomGen.nextInt(360) + 1;
 			asteroid = new Asteroid(astDegrees);
@@ -101,4 +102,38 @@ public class AsteroidsGame extends Application {
 		}
 
 	}
+	
+	public void collision() {
+		 Double shipX1 = Ship.shipX + 25;
+		 Double shipX2 = Ship.shipX - 25;
+		 Double shipY1 = Ship.shipY - 25;
+		 Double shipY2 = Ship.shipY + 25;
+		 
+		 Iterator<Bullet> iter = bullets.iterator();
+			while (iter.hasNext()) {
+				
+				Bullet bulletQ = iter.next();
+				
+				 Double bulletX1 = bulletQ.bulletX + bulletQ.bulletW/2;
+				 Double bulletX2 = bulletQ.bulletX - bulletQ.bulletW/2;
+				 Double bulletY1 = bullet.bulletY - bulletQ.bulletH/2;
+				 Double bulletY2 = bullet.bulletY + bulletQ.bulletH/2;
+				
+				}
+			
+			 Double astX1 = Ship.shipX + 25;
+			 Double astX2 = Ship.shipX + 25;
+			 Double astY1 = Ship.shipX + 25;
+			 Double astY2 = Ship.shipX + 25;
+
+			}
+		 
+		
+		 
+		
+	
+		
+		
+		
+	
 }

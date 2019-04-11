@@ -6,7 +6,6 @@ import javafx.scene.paint.Color;
 public class Bullet {
 	
 	Color color;
-	static boolean enroute = false;
 	double bulletX;
 	double bulletY;
 	double bulletW;
