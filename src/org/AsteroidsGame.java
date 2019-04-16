@@ -23,8 +23,6 @@ public class AsteroidsGame extends Application {
 	Ship ship;
 	Asteroid asteroid;
 	Bullet bullet;
-	Bullet bullet2;
-	Bullet bullet3;
 	List<Bullet> bullets = new ArrayList<Bullet>();
 	List<Asteroid> asteroids = new ArrayList<Asteroid>();
 
@@ -52,6 +50,7 @@ public class AsteroidsGame extends Application {
 				ship.update(keyboarding, gc);
 				ship.draw(gc);
 				fire();
+				collision();
 
 				Iterator<Bullet> iter = bullets.iterator();
 				while (iter.hasNext()) {
@@ -94,46 +93,62 @@ public class AsteroidsGame extends Application {
 
 	public void fire() {
 
-		if (KeyboardInputs.shoot) {
-			
+		if (KeyboardInputs.shoot && bullets.size() <= 3) {
+
 			bullet = new Bullet(Color.RED);
 			bullets.add(bullet);
 
 		}
 
 	}
-	
+
 	public void collision() {
-		 Double shipX1 = Ship.shipX + 25;
-		 Double shipX2 = Ship.shipX - 25;
-		 Double shipY1 = Ship.shipY - 25;
-		 Double shipY2 = Ship.shipY + 25;
-		 
-		 Iterator<Bullet> iter = bullets.iterator();
-			while (iter.hasNext()) {
-				
-				Bullet bulletQ = iter.next();
-				
-				 Double bulletX1 = bulletQ.bulletX + bulletQ.bulletW/2;
-				 Double bulletX2 = bulletQ.bulletX - bulletQ.bulletW/2;
-				 Double bulletY1 = bullet.bulletY - bulletQ.bulletH/2;
-				 Double bulletY2 = bullet.bulletY + bulletQ.bulletH/2;
-				
-				}
+		Double sX1 = Ship.shipX + 25;
+		Double sX2 = Ship.shipX - 25;
+		Double sY1 = Ship.shipY - 25;
+		Double sY2 = Ship.shipY + 25;
+
+		Iterator<Bullet> iter = bullets.iterator();
+		
+		while (iter.hasNext()) {
+
+			Bullet bulletQ = iter.next();
+
+			Double bX1 = bulletQ.bulletX - bulletQ.bulletW / 2;
+			Double bX2 = bulletQ.bulletX + bulletQ.bulletW / 2;
+			Double bY1 = bulletQ.bulletY - bulletQ.bulletH / 2;
+			Double bY2 = bulletQ.bulletY + bulletQ.bulletH / 2;
 			
-			 Double astX1 = Ship.shipX + 25;
-			 Double astX2 = Ship.shipX + 25;
-			 Double astY1 = Ship.shipX + 25;
-			 Double astY2 = Ship.shipX + 25;
+			Iterator<Asteroid> iter2 = asteroids.iterator();
+			
+			System.out.println("b");
+			
+			while (iter2.hasNext()) {
+				Asteroid astQ = iter2.next();
+
+				Double aX1 = astQ.astX - astQ.astW/2;
+				Double aX2 = astQ.astX + astQ.astW/2;
+				Double aY1 = astQ.astY - astQ.astH/2;
+				Double aY2 = astQ.astY + astQ.astH/2;
+				
+				System.out.println("a");
+				
+				if(bX1 <= aX2 && bX2 >= aX1 && bY1 <=aY2 && bY2 >= aY1) {
+					
+					iter.remove();
+					iter2.remove();
+					
+					System.out.println("r");
+				}
 
 			}
-		 
+		}
 		
-		 
-		
-	
+
 		
 		
 		
-	
+
+	}
+
 }
