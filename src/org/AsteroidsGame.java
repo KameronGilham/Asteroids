@@ -79,14 +79,19 @@ public class AsteroidsGame extends Application {
 					astQ.draw(gc);
 					astQ.update(gc);
 				}
-				if(gameOver){
-					
-				bullets.remove(bullet);
-				gc.setFont(Font.font(canvasH/9));
-				gc.setStroke(Color.RED);
-				gc.strokeText("Game Over", canvasW/5, canvasH/2);
+				if (gameOver) {
+
+					bullets.remove(bullet);
+					gc.setFont(Font.font(canvasH / 9));
+					gc.setStroke(Color.RED);
+					gc.strokeText("Game Over", canvasW / 5, canvasH / 2);
 				}
-				
+
+				if (youWin) {
+					gc.setFont(Font.font(canvasH / 9));
+					gc.setStroke(Color.GREEN);
+					gc.strokeText("You Win!", canvasW / 4, canvasH / 2);
+				}
 
 			}
 
@@ -149,12 +154,15 @@ public class AsteroidsGame extends Application {
 					astIter.remove();
 
 				}
-				
+
+				if (asteroids.size() == 0) {
+					youWin = true;
+				}
 
 			}
 
 		}
-		
+
 		Iterator<Asteroid> astIter = asteroids.iterator();
 		while (astIter.hasNext()) {
 			Asteroid astQ = astIter.next();
