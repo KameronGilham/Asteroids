@@ -25,6 +25,7 @@ public class AsteroidsGame extends Application {
 	Bullet bullet;
 	List<Bullet> bullets = new ArrayList<Bullet>();
 	List<Asteroid> asteroids = new ArrayList<Asteroid>();
+	List<Ship> ships = new ArrayList<Ship>();
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -47,26 +48,31 @@ public class AsteroidsGame extends Application {
 			public void handle(long now) {
 
 				gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-				ship.update(keyboarding, gc);
-				ship.draw(gc);
 				fire();
 				collision();
 
-				Iterator<Bullet> iter = bullets.iterator();
-				while (iter.hasNext()) {
-					Bullet bulletQ = iter.next();
+				Iterator<Ship> shipIter = ships.iterator();
+				while (shipIter.hasNext()) {
+					Ship shipQ = shipIter.next();
+					shipQ.draw(gc);
+					shipQ.update(keyboarding, gc);
+				}
+
+				Iterator<Bullet> bullIter = bullets.iterator();
+				while (bullIter.hasNext()) {
+					Bullet bulletQ = bullIter.next();
 					bulletQ.update(keyboarding, gc);
 					if (bulletQ.bulletFrames > 30) {
-						iter.remove();
+						bullIter.remove();
 					} else {
 						bulletQ.draw(gc);
 					}
 
 				}
 
-				Iterator<Asteroid> iter2 = asteroids.iterator();
-				while (iter2.hasNext()) {
-					Asteroid astQ = iter2.next();
+				Iterator<Asteroid> astIter = asteroids.iterator();
+				while (astIter.hasNext()) {
+					Asteroid astQ = astIter.next();
 					astQ.draw(gc);
 					astQ.update(gc);
 				}
@@ -80,6 +86,7 @@ public class AsteroidsGame extends Application {
 	public void init() {
 
 		ship = new Ship(Color.BLUE);
+		ships.add(ship);
 		int astNum = randomGen.nextInt(5) + 3;
 
 		for (int i = 0; i < astNum; i++) {
@@ -103,52 +110,59 @@ public class AsteroidsGame extends Application {
 	}
 
 	public void collision() {
-		Double sX1 = Ship.shipX + 25;
-		Double sX2 = Ship.shipX - 25;
-		Double sY1 = Ship.shipY - 25;
-		Double sY2 = Ship.shipY + 25;
 
-		Iterator<Bullet> iter = bullets.iterator();
-		
-		while (iter.hasNext()) {
+		Iterator<Bullet> bullIter = bullets.iterator();
 
-			Bullet bulletQ = iter.next();
+		while (bullIter.hasNext()) {
+
+			Bullet bulletQ = bullIter.next();
 
 			Double bX1 = bulletQ.bulletX - bulletQ.bulletW / 2;
 			Double bX2 = bulletQ.bulletX + bulletQ.bulletW / 2;
 			Double bY1 = bulletQ.bulletY - bulletQ.bulletH / 2;
 			Double bY2 = bulletQ.bulletY + bulletQ.bulletH / 2;
-			
-			Iterator<Asteroid> iter2 = asteroids.iterator();
-			
-			System.out.println("b");
-			
-			while (iter2.hasNext()) {
-				Asteroid astQ = iter2.next();
 
-				Double aX1 = astQ.astX - astQ.astW/2;
-				Double aX2 = astQ.astX + astQ.astW/2;
-				Double aY1 = astQ.astY - astQ.astH/2;
-				Double aY2 = astQ.astY + astQ.astH/2;
-				
-				System.out.println("a");
-				
-				if(bX1 <= aX2 && bX2 >= aX1 && bY1 <=aY2 && bY2 >= aY1) {
-					
-					iter.remove();
-					iter2.remove();
-					
-					System.out.println("r");
+			Iterator<Asteroid> astIter = asteroids.iterator();
+
+			while (astIter.hasNext()) {
+				Asteroid astQ = astIter.next();
+
+				Double aX1 = astQ.astX - astQ.astW / 2;
+				Double aX2 = astQ.astX + astQ.astW / 2;
+				Double aY1 = astQ.astY - astQ.astH / 2;
+				Double aY2 = astQ.astY + astQ.astH / 2;
+
+				if (bX1 <= aX2 && bX2 >= aX1 && bY1 <= aY2 && bY2 >= aY1) {
+
+					bullIter.remove();
+					astIter.remove();
+
 				}
 
 			}
+
 		}
-		
+		Iterator<Asteroid> astIter = asteroids.iterator();
+		while (astIter.hasNext()) {
+			Asteroid astQ = astIter.next();
 
-		
-		
-		
+			Double aX1 = astQ.astX - astQ.astW / 2;
+			Double aX2 = astQ.astX + astQ.astW / 2;
+			Double aY1 = astQ.astY - astQ.astH / 2;
+			Double aY2 = astQ.astY + astQ.astH / 2;
 
+			Double sX1 = Ship.shipX - 25;
+			Double sX2 = Ship.shipX + 25;
+			Double sY1 = Ship.shipY - 25;
+			Double sY2 = Ship.shipY + 25;
+
+			if (sX1 <= aX2 && sX2 >= aX1 && sY1 <= aY2 && sY2 >= aY1) {
+
+				ships.remove(ship);
+
+			}
+
+		}
 	}
 
 }
