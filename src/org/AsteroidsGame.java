@@ -13,6 +13,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class AsteroidsGame extends Application {
@@ -26,6 +27,8 @@ public class AsteroidsGame extends Application {
 	List<Bullet> bullets = new ArrayList<Bullet>();
 	List<Asteroid> asteroids = new ArrayList<Asteroid>();
 	List<Ship> ships = new ArrayList<Ship>();
+	Boolean gameOver = false;
+	Boolean youWin = false;
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -76,6 +79,14 @@ public class AsteroidsGame extends Application {
 					astQ.draw(gc);
 					astQ.update(gc);
 				}
+				if(gameOver){
+					
+				bullets.remove(bullet);
+				gc.setFont(Font.font(canvasH/9));
+				gc.setStroke(Color.RED);
+				gc.strokeText("Game Over", canvasW/5, canvasH/2);
+				}
+				
 
 			}
 
@@ -138,10 +149,12 @@ public class AsteroidsGame extends Application {
 					astIter.remove();
 
 				}
+				
 
 			}
 
 		}
+		
 		Iterator<Asteroid> astIter = asteroids.iterator();
 		while (astIter.hasNext()) {
 			Asteroid astQ = astIter.next();
@@ -159,6 +172,7 @@ public class AsteroidsGame extends Application {
 			if (sX1 <= aX2 && sX2 >= aX1 && sY1 <= aY2 && sY2 >= aY1) {
 
 				ships.remove(ship);
+				gameOver = true;
 
 			}
 

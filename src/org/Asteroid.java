@@ -21,7 +21,7 @@ public class Asteroid {
 	Random randomGen = new Random();
 
 	public Asteroid(int d) {
-		color = Color.WHITE;
+		color = Color.GRAY;
 		astX = randomGen.nextInt((int) AsteroidsGame.canvasW);
 		astY =  randomGen.nextInt((int) AsteroidsGame.canvasH);
 		astW =  randomGen.nextInt(20) + 20;
