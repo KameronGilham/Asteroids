@@ -87,6 +87,10 @@ public class AsteroidsGame extends Application {
 					gc.setStroke(Color.RED);
 					gc.strokeText("Game Over", canvasW / 5, canvasH / 2);
 				}
+				
+				if (asteroids.size() == 0) {
+					youWin = true;
+				}
 
 				if (youWin) {
 					gc.setFont(Font.font(canvasH / 9));
@@ -153,15 +157,20 @@ public class AsteroidsGame extends Application {
 
 					bullIter.remove();
 					astIter.remove();
+					
+					if(astQ.astW < 40 || astQ.astH < 40 ) {
+						
+					} else {
+					
+						astIter.add(new Asteroid(astQ.astX, astQ.astY, 
+									astQ.astW > 60 ? (new Random().nextInt(20) + 40) : new Random().nextInt(20) + 20,
+									astQ.astH / 2, astQ.astSpeed));
 					astIter.add(new Asteroid(astQ.astX, astQ.astY, astQ.astW / 2, astQ.astH / 2, astQ.astSpeed));
-					astIter.add(new Asteroid(astQ.astX, astQ.astY, astQ.astW / 2, astQ.astH / 2, astQ.astSpeed));
+					}
 					break;
 
 				}
 
-				if (asteroids.size() == 0) {
-					youWin = true;
-				}
 
 			}
 
