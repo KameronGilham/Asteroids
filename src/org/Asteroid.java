@@ -14,26 +14,38 @@ public class Asteroid {
 	double astH;
 	double xVelocity;
 	double yVelocity;
-	double speed;
-	double degrees;
+	double astSpeed;
+	double astDegrees;
 	double angle;
 	double astFrames;
 	Random randomGen = new Random();
 
-	public Asteroid(int d) {
+	public Asteroid(double x, double y, double w, double h, double s) {
+		
+		astX = x;
+		astY =  y;
+		astW =  w;
+		astH =  h;
+		astSpeed = s;
+		astDegrees = new Random().nextInt(360) + 1;
 		color = Color.GRAY;
-		astX = randomGen.nextInt((int) AsteroidsGame.canvasW);
-		astY =  randomGen.nextInt((int) AsteroidsGame.canvasH);
-		astW =  randomGen.nextInt(20) + 20;
-		astH =  randomGen.nextInt(20) + 20;
 		astFrames = 0;
 		xVelocity = 0;
 		yVelocity = 0;
-		speed = randomGen.nextInt(5) + 1;
-		degrees = d;
-		angle = (degrees * (Math.PI / 180));
+		angle = (astDegrees * (Math.PI / 180));
 		
 	}
+	
+	public Asteroid() {
+		
+		this(new Random().nextInt(100) - 100,
+				new Random().nextInt(100) - 100,
+				new Random().nextInt(50) + 20,
+				new Random().nextInt(50) + 20,
+				new Random().nextInt(5) + 1);
+
+	}
+	
 	public void draw(GraphicsContext gc) {
 		gc.setFill(color);
 		gc.save();
@@ -43,8 +55,8 @@ public class Asteroid {
 	
 	public void update(GraphicsContext gc) {
 		
-		xVelocity = Math.sin(angle) * speed;
-		yVelocity = Math.cos(angle) * speed;
+		xVelocity = Math.sin(angle) * astSpeed;
+		yVelocity = Math.cos(angle) * astSpeed;
 		
 		astX += xVelocity;
 

@@ -3,6 +3,7 @@ package org;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 
 import javafx.animation.AnimationTimer;
@@ -104,11 +105,11 @@ public class AsteroidsGame extends Application {
 		ship = new Ship(Color.BLUE);
 		ships.add(ship);
 		int astNum = randomGen.nextInt(5) + 3;
+		
 
 		for (int i = 0; i < astNum; i++) {
-
-			int astDegrees = randomGen.nextInt(360) + 1;
-			asteroid = new Asteroid(astDegrees);
+			
+			asteroid = new Asteroid();
 			asteroids.add(asteroid);
 		}
 
@@ -138,7 +139,7 @@ public class AsteroidsGame extends Application {
 			Double bY1 = bulletQ.bulletY - bulletQ.bulletH / 2;
 			Double bY2 = bulletQ.bulletY + bulletQ.bulletH / 2;
 
-			Iterator<Asteroid> astIter = asteroids.iterator();
+			ListIterator<Asteroid> astIter = asteroids.listIterator();
 
 			while (astIter.hasNext()) {
 				Asteroid astQ = astIter.next();
@@ -152,6 +153,9 @@ public class AsteroidsGame extends Application {
 
 					bullIter.remove();
 					astIter.remove();
+					astIter.add(new Asteroid(astQ.astX, astQ.astY, astQ.astW / 2, astQ.astH / 2, astQ.astSpeed));
+					astIter.add(new Asteroid(astQ.astX, astQ.astY, astQ.astW / 2, astQ.astH / 2, astQ.astSpeed));
+					break;
 
 				}
 
