@@ -40,8 +40,8 @@ public class Asteroid {
 		
 		this(new Random().nextInt(100) - 100,
 				new Random().nextInt(100) - 100,
-				new Random().nextInt(50) + 20,
-				new Random().nextInt(50) + 20,
+				new Random().nextInt(60) + 20,
+				new Random().nextInt(60) + 20,
 				new Random().nextInt(5) + 1);
 
 	}
